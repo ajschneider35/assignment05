@@ -106,8 +106,36 @@ public class SortUtil {
 	 * @param list
 	 * @param cmp
 	 */
-	public static <T> void quicksort(ArrayList<T> list, Comparator<? super T> cmp) {
-		//TODO
+	public static <T> void quicksort(ArrayList<T> list, int left, int right, Comparator<? super T> cmp) {
+		
+		      int index = partition(list, left, right, cmp);
+		      if (left < index - 1)
+		            quicksort(list, left, index - 1, cmp);
+		      if (index < right)
+		            quicksort(list, index, right, cmp);
+		}
+	
+	public static <T> int partition(ArrayList<T> list, int left, int right, Comparator<? super T> cmp)
+	{
+	      int i = left, j = right;
+	      T tmp;
+	      T pivot = list.get((left + right) / 2);
+	     
+	      while (i <= j) {
+	            while (cmp.compare(list.get(i), pivot) < 0)
+	                  i++;
+	            while (cmp.compare(list.get(j), pivot) > 0)
+	                  j--;
+	            if (i <= j) {
+	                  tmp = list.get(i);
+	                  list.set(i, list.get(j));
+	                  list.set(j, tmp);
+	                  i++;
+	                  j--;
+	            }
+	      };
+	     
+	      return i;
 	}
 	
 	/**
