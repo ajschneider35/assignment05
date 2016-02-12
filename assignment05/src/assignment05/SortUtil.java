@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public class SortUtil {
 	
+	private static final int THRESHOLD = 100;
+	
 	/**
 	 * This method performs a mergesort on the generic ArrayList given as input.
 	 * Driver method.
@@ -20,7 +22,82 @@ public class SortUtil {
 	 * @param cmp
 	 */
 	public static <T> void mergesort(ArrayList<T> list, Comparator<? super T> cmp) {
-		//TODO
+		
+		ArrayList<T> tempList = new ArrayList<T>();
+		mergesort(list, tempList, 0, list.size()-1, cmp);
+	}
+	
+	/**
+	 * Internal method that makes recursive calls.
+	 * @param list a list of items
+	 * @param tempList a list to place the merged result
+	 * @param left left-most index of the subarray
+	 * @param right right-most index of the subarray
+	 * @param cmp
+	 */
+	private static <T> void mergesort(ArrayList<T> list, ArrayList<T> tempList, int left, 
+										int right, Comparator<? super T> cmp) {
+		
+		//Insertion Sort if size of data is below threshold
+		if(list.size() <= THRESHOLD) {
+			for(int i = 1; i < list.size(); i++)
+			{
+				T temp = list.get(i);
+				int j;
+				for(j = i - 1; j >= 0 && cmp.compare(temp, list.get(j)) < 0; j--)
+				{
+					list.set(j + 1, list.get(j));
+				}
+				list.set(j + 1, temp);
+			}
+		}
+		else {
+			
+			if(left < right) {
+				
+				int center = (left + right)/2;
+				mergesort(list, tempList, left, center, cmp);
+				mergesort(list, tempList, center + 1, right, cmp);
+				merge(list, tempList, left, center + 1, right, cmp);
+			}
+		}
+	}
+	
+	/**
+	 * Internal method that merges two sorted halves of a subarray.
+	 * @param list a list of items
+	 * @param tempList a list to place the merged result
+	 * @param leftPos left-most index of the subarray
+	 * @param rightPos index of the start of the second half
+	 * @param rightEnd right-most index of the subarray
+	 * @param cmp
+	 */
+	private static <T> void merge(ArrayList<T> list, ArrayList<T> tempList, int leftPos, 
+									int rightPos, int rightEnd, Comparator<? super T> cmp) {
+		
+		int leftEnd = rightPos - 1;
+		int tempPos = leftPos;
+		int numElements = rightEnd - leftPos + 1;
+		
+		//Main Loop
+		while(leftPos <= leftEnd && rightPos <= rightEnd) {
+			
+			if(cmp.compare(list.get(leftPos), list.get(rightPos)) <= 0)
+				tempList.set(tempPos++, list.get(leftPos++));
+			else
+				tempList.set(tempPos++, list.get(rightPos++));
+		}
+		//Copy the rest of the left half
+		while(leftPos <= leftEnd)
+			tempList.set(tempPos++, list.get(leftPos++));
+		
+		//Copy the rest of the right half
+		while(rightPos <= rightEnd)
+			tempList.set(tempPos++, list.get(rightPos++));
+		
+		//Copy tempList back
+		for(int i = 0; i < numElements; rightEnd--)
+			list.set(rightEnd, tempList.get(rightEnd));
 	}
 	
 	/**
