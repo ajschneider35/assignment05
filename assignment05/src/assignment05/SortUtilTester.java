@@ -30,7 +30,7 @@ public class SortUtilTester {
 				return int1.compareTo(int2);
 			}
 		}
-		SortUtil.quicksort(list, 0, list.size() - 1, new sortInteger());
+		SortUtil.quicksort(list, new sortInteger());
 
 		assertEquals(result, list);
 

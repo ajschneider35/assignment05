@@ -106,15 +106,21 @@ public class SortUtil {
 	 * @param list
 	 * @param cmp
 	 */
+	//driver
+	public static <T> void quicksort(ArrayList<T> list, Comparator<? super T> cmp) {
+		
+	      quicksort(list, 0, list.size()-1, cmp);
+	}
+	//search
 	public static <T> void quicksort(ArrayList<T> list, int left, int right, Comparator<? super T> cmp) {
 		
-		      int index = partition(list, left, right, cmp);
-		      if (left < index - 1)
-		            quicksort(list, left, index - 1, cmp);
-		      if (index < right)
-		            quicksort(list, index, right, cmp);
+		      int pivot = partition(list, left, right, cmp);
+		      if (left < pivot - 1)
+		            quicksort(list, left, pivot - 1, cmp);
+		      if (pivot < right)
+		            quicksort(list, pivot, right, cmp);
 		}
-	
+	//helper
 	public static <T> int partition(ArrayList<T> list, int left, int right, Comparator<? super T> cmp)
 	{
 	      int i = left, j = right;
