@@ -48,7 +48,6 @@ public class SortUtilTester {
 				return int1.compareTo(int2);
 			}
 		}
-		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		SortUtil.mergesort(list, new sortInteger());
 
 		assertEquals(result, list);
