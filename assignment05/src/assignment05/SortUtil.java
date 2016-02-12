@@ -2,6 +2,7 @@ package assignment05;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * FILL IN
@@ -38,8 +39,11 @@ public class SortUtil {
 	 * @return
 	 */
 	public static ArrayList<Integer> generateBestCase(int size) {
-		//TODO
-		return new ArrayList<Integer>();
+		
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		for(int i = 1; i <= size; i++)
+			intList.add(i);
+		return intList;
 	}
 	
 	/**
@@ -49,8 +53,19 @@ public class SortUtil {
 	 * @return
 	 */
 	public static ArrayList<Integer> generateAverageCase(int size) {
-		//TODO
-		return new ArrayList<Integer>();
+		
+		Random r = new Random();
+		ArrayList<Integer> intList = generateBestCase(size);
+		int randomIndex;
+		int temp;
+		
+		for(int i = 0; i < size; i++) {
+			randomIndex = r.nextInt(size);
+			temp = intList.get(i);
+			intList.set(i, intList.get(randomIndex));
+			intList.set(randomIndex, temp);
+		}
+		return intList;
 	}
 	
 	/**
@@ -59,8 +74,11 @@ public class SortUtil {
 	 * @return
 	 */
 	public static ArrayList<Integer> generateWorstCase(int size) {
-		//TODO
-		return new ArrayList<Integer>();
+		
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		for(int i = size; i >= 1; i--)
+			intList.add(i);
+		return intList;
 	}
 
 }
