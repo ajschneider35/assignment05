@@ -29,6 +29,7 @@ public class SortUtil {
 			Comparator<? super T> cmp) {
 
 		ArrayList<T> tempList = new ArrayList<T>();
+		tempList.addAll(list);
 		mergesort(list, tempList, 0, list.size() - 1, cmp);
 	}
 
@@ -109,8 +110,10 @@ public class SortUtil {
 			tempList.set(tempPos++, list.get(rightPos++));
 
 		// Copy tempList back
-		for (int i = 0; i < numElements; rightEnd--)
+		for (int i = 0; i < numElements; rightEnd--) {
 			list.set(rightEnd, tempList.get(rightEnd));
+			i++;
+		}
 	}
 
 	/**

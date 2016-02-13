@@ -21,8 +21,8 @@ public class SortUtilTester {
 
 	@Test
 	public void testQuickSort() {
-		ArrayList<Integer> result = SortUtil.generateAverageCase(15);
-		ArrayList<Integer> list = SortUtil.generateAverageCase(15);
+		ArrayList<Integer> result = SortUtil.generateAverageCase(200);
+		ArrayList<Integer> list = SortUtil.generateAverageCase(200);
 		Collections.sort(result);
 
 		class sortInteger implements Comparator<Integer> {
@@ -32,15 +32,15 @@ public class SortUtilTester {
 			}
 		}
 		SortUtil.quicksort(list, new sortInteger());
-
-		assertEquals(result, list);
-
+		
+		for(int i = 0; i < list.size(); i++)
+			assertEquals(result.get(i), list.get(i));
 	}
 
 	@Test
 	public void testMergeSort() {
-		ArrayList<Integer> result = SortUtil.generateAverageCase(15);
-		ArrayList<Integer> list = SortUtil.generateAverageCase(15);
+		ArrayList<Integer> result = SortUtil.generateAverageCase(200);
+		ArrayList<Integer> list = SortUtil.generateAverageCase(200);
 		Collections.sort(result);
 
 		class sortInteger implements Comparator<Integer> {
@@ -50,8 +50,9 @@ public class SortUtilTester {
 			}
 		}
 		SortUtil.mergesort(list, new sortInteger());
-
-		assertEquals(result, list);
+		
+		for(int i = 0; i < list.size(); i++)
+			assertEquals(result.get(i), list.get(i));
 
 	}
 
