@@ -126,8 +126,10 @@ public class SortUtil {
 	// driver
 	public static <T> void quicksort(ArrayList<T> list,
 			Comparator<? super T> cmp) {
+		if(list.size()!=0){
+			quicksort(list, 0, list.size() - 1, cmp);
+		}
 
-		quicksort(list, 0, list.size() - 1, cmp);
 	}
 
 	// search
@@ -146,7 +148,7 @@ public class SortUtil {
 			Comparator<? super T> cmp) {
 		int i = left, j = right;
 		T tmp;
-		T pivot = findPivot(list, left, right, "Median", cmp, rand);
+		T pivot = findPivot(list, left, right, "Random", cmp, rand);
 
 		while (i <= j) {
 			while (cmp.compare(list.get(i), pivot) < 0)
@@ -176,9 +178,9 @@ public class SortUtil {
 			pivot = list.get((left + right) / 2);
 			break;
 		}
-		// random element
+		// Random element in the list
 		case "Random": {
-			pivot = list.get(rand.nextInt(list.size()));
+			pivot = list.get(left + rand.nextInt(right - left));
 			break;
 		}
 		// median of first, middle, and last elements
