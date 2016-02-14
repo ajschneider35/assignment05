@@ -149,7 +149,7 @@ public class SortUtil {
 			Comparator<? super T> cmp) {
 		int i = left, j = right;
 		T tmp;
-		T pivot = findPivot(list, left, right, "Random", cmp, rand);
+		T pivot = findPivot(list, left, right, "Median", cmp, rand);
 
 		while (i <= j) {
 			while (cmp.compare(list.get(i), pivot) < 0)

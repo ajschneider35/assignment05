@@ -16,10 +16,10 @@ public class SortUtilTiming {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		timeQuicksort(100000, 2000000, 100000, 500, "Quicksort");
+		timeQuicksort(1000, 10000, 1000, 10, "Quicksort Median of 3 Pivot");
 		
 		//Adjust threshold of mergesort here, 5th parameter
-		timeMergesort(1000, 20000, 1000, 75, 1000, "Mergesort");
+		//timeMergesort(1000, 10000, 1000, 75, 1000, "Mergesort");
 	}
 
 	/**
