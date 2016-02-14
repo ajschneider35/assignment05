@@ -5,7 +5,8 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * FILL IN
+ * A class that executes a merge sort and a quicksort. Also generates a sorted list, reverse sorted list,
+ * and a randomly ordered list of Integers.
  * 
  * @author Andrew Schneider
  * @author Connor Ottenbacher

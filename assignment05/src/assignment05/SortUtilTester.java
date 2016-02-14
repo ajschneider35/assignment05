@@ -91,6 +91,54 @@ public class SortUtilTester {
 			assertEquals(result.get(i), list.get(i));
 
 	}
+	
+	@Test
+	public void MergesortEmptyList() {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		SortUtil.mergesort(list, new sortInteger());
+		
+		assertEquals(result.size(), list.size());
+		assertEquals(0, list.size());
+	}
+	
+	@Test
+	public void MergesortAlreadySorted() {
+		ArrayList<Integer> result = SortUtil.generateBestCase(200);
+		ArrayList<Integer> list = SortUtil.generateBestCase(200);
+		
+		SortUtil.mergesort(list, new sortInteger());
+		
+		for(int i = 0; i < list.size(); i++)
+			assertEquals(result.get(i), list.get(i));
+	}
+	
+	@Test
+	public void MergesortReverseSorted() {	
+		ArrayList<Integer> result = SortUtil.generateBestCase(200);
+		ArrayList<Integer> list = SortUtil.generateWorstCase(200);
+		
+		SortUtil.mergesort(list, new sortInteger());
+		
+		for(int i = 0; i < list.size(); i++)
+			assertEquals(result.get(i), list.get(i));
+	}
+	
+	@Test
+	public void MergesortAllTheSameItemsInList() {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < 200; i++) {
+			result.add(1);
+			list.add(1);
+		}
+		
+		SortUtil.mergesort(list, new sortInteger());
+		
+		for(int i = 0; i < list.size(); i++)
+			assertEquals(result.get(i), list.get(i));
+	}
 
 	@Test
 	public void testFindPivot() {
