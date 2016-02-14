@@ -186,9 +186,9 @@ public class SortUtil {
 		}
 		// median of first, middle, and last elements
 		case "Median": {
-			T mid = list.get((left + right) / 2);
-			T top = list.get(right);
-			T bot = list.get(left);
+			T mid = list.get(left + rand.nextInt(right - left));
+			T top = list.get(left + rand.nextInt(right - left));
+			T bot = list.get(left + rand.nextInt(right - left));
 			if (cmp.compare(mid, top)>=0) {
 				  if (cmp.compare(top, bot)>=0) {
 				    pivot = top;
