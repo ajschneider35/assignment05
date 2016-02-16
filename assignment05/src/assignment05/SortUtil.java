@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class SortUtil {
 
-	private static final int THRESHOLD = 100;
+	private static final int THRESHOLD = 1250;
 	
 	private static Random rand = new Random();
 
@@ -133,7 +133,13 @@ public class SortUtil {
 
 	}
 
-	// search
+	/**
+	 * Recursive method initiating the partitioning and sorting of quicksort driver method.
+	 * @param list
+	 * @param left
+	 * @param right
+	 * @param cmp
+	 */
 	public static <T> void quicksort(ArrayList<T> list, int left, int right,
 			Comparator<? super T> cmp) {
 
@@ -144,7 +150,14 @@ public class SortUtil {
 			quicksort(list, index, right, cmp);
 	}
 
-	// helper
+	/**
+	 * Helper method that partitions the input ArrayList<T>
+	 * @param list
+	 * @param left
+	 * @param right
+	 * @param cmp
+	 * @return
+	 */
 	public static <T> int partition(ArrayList<T> list, int left, int right,
 			Comparator<? super T> cmp) {
 		int i = left, j = right;
@@ -169,7 +182,16 @@ public class SortUtil {
 		return i;
 	}
 
-	// pivot selection
+	/**
+	 * Helper method that selects the pivot for the quicksort based on the user's choice.
+	 * @param list
+	 * @param left
+	 * @param right
+	 * @param choice
+	 * @param cmp
+	 * @param rand
+	 * @return
+	 */
 	public static <T> T findPivot(ArrayList<T> list, int left, int right,
 			String choice, Comparator<? super T> cmp, Random rand) {
 		T pivot;

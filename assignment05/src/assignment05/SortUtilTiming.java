@@ -16,10 +16,10 @@ public class SortUtilTiming {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		timeQuicksort(1000, 10000, 1000, 10, "Quicksort Median of 3 Pivot");
+		//timeQuicksort(1000, 10000, 1000, 10, "Quicksort Median of 3 Pivot");
 		
 		//Adjust threshold of mergesort here, 5th parameter
-		//timeMergesort(1000, 10000, 1000, 75, 1000, "Mergesort");
+		timeMergesort(1000, 10000, 1000, 75, "Mergesort Threshold 1250");
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class SortUtilTiming {
 	 * @param timesToLoop The number of times to average the timing measurement at each problem size
 	 * @param methodName The name of the method being tested
 	 */
-	public static void timeMergesort(int nStart, int nStop, int nStep, int timesToLoop, int threshold,
+	public static void timeMergesort(int nStart, int nStop, int nStep, int timesToLoop,
 			String methodName) {
 		// try computing T(N)/F(N), see if it converges
 		long startTime, midpointTime, stopTime;
