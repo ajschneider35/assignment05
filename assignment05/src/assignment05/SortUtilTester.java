@@ -14,7 +14,7 @@ import org.junit.Test;
  * 
  * @author Andrew Schneider
  * @author Connor Ottenbacher
- * @version 2/11/2016
+ * @version 2/18/2016
  *
  */
 public class SortUtilTester {
