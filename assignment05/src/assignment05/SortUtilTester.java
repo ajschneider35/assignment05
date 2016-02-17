@@ -14,7 +14,7 @@ import org.junit.Test;
  * 
  * @author Andrew Schneider
  * @author Connor Ottenbacher
- * @version 2/18/2016
+ * @version 2/11/2016
  *
  */
 public class SortUtilTester {
@@ -140,19 +140,6 @@ public class SortUtilTester {
 			assertEquals(result.get(i), list.get(i));
 	}
 
-	@Test
-	public void testFindPivot() {
-		ArrayList<Integer> test = new ArrayList<Integer>();
-		test.add(1);
-		test.add(2000);
-		test.add(2000);
-
-		Random rand = new Random();
-
-		assertEquals((Integer) 2000, SortUtil.findPivot(test, 0, test.size() - 1,
-				"Median", new sortInteger(), rand));
-
-	}
 	
 	public class sortInteger implements Comparator<Integer> {
 

@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * A class that executes a merge sort and a quicksort. Also generates a sorted list, reverse sorted list,
- * and a randomly ordered list of Integers.
+ * A class that executes a merge sort and a quicksort. Also generates a sorted
+ * list, reverse sorted list, and a randomly ordered list of Integers.
  * 
  * @author Andrew Schneider
  * @author Connor Ottenbacher
@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class SortUtil {
 
-	private static final int THRESHOLD = 1250;
-	
+	private static final int THRESHOLD = 20;
+
 	private static Random rand = new Random();
 
 	/**
@@ -124,45 +124,57 @@ public class SortUtil {
 	 * @param list
 	 * @param cmp
 	 */
-	// driver
 	public static <T> void quicksort(ArrayList<T> list,
 			Comparator<? super T> cmp) {
-		if(list.size()!=0){
+		if (list.size() != 0) {
 			quicksort(list, 0, list.size() - 1, cmp);
 		}
 
 	}
 
 	/**
-	 * Recursive method initiating the partitioning and sorting of quicksort driver method.
+	 * This method performs a quicksort on the generic ArrayList given as input.
+	 * 
 	 * @param list
+	 *            to be sorted
 	 * @param left
+	 *            the left most element of the array
 	 * @param right
+	 *            the last element in the array
 	 * @param cmp
+	 *            used to order the elements
 	 */
 	public static <T> void quicksort(ArrayList<T> list, int left, int right,
 			Comparator<? super T> cmp) {
-
+		// partitions the list and returns the index of the pivot
 		int index = partition(list, left, right, cmp);
+		// sorts the left half
 		if (left < index - 1)
 			quicksort(list, left, index - 1, cmp);
+		// sorts the right half
 		if (index < right)
 			quicksort(list, index, right, cmp);
 	}
 
 	/**
-	 * Helper method that partitions the input ArrayList<T>
+	 * This method partitions and rearranges elements less than the pivot to the
+	 * left of the pivot and elements greater than the pivot to the right of the
+	 * pivot element. Returns the index of the pivot element
+	 * 
 	 * @param list
+	 *            to be sorted
 	 * @param left
+	 *            the left most element of the array
 	 * @param right
+	 *            the last element in the array
 	 * @param cmp
-	 * @return
+	 *            used to order the elements
 	 */
 	public static <T> int partition(ArrayList<T> list, int left, int right,
 			Comparator<? super T> cmp) {
 		int i = left, j = right;
 		T tmp;
-		T pivot = findPivot(list, left, right, "Median", cmp, rand);
+		T pivot = findPivot(list, left, right, "Random", cmp, rand);
 
 		while (i <= j) {
 			while (cmp.compare(list.get(i), pivot) < 0)
@@ -183,51 +195,57 @@ public class SortUtil {
 	}
 
 	/**
-	 * Helper method that selects the pivot for the quicksort based on the user's choice.
+	 * This method performs a quicksort on the generic ArrayList given as input.
+	 * 
 	 * @param list
+	 *            to be sorted
 	 * @param left
+	 *            the left most element of the array
 	 * @param right
-	 * @param choice
+	 *            the last element in the array
 	 * @param cmp
-	 * @param rand
-	 * @return
+	 *            used to order the elements
+	 * @param used
+	 *            to generate a random index
+	 * @param String
+	 *            used to decide which pivot selection strategy will be used
 	 */
 	public static <T> T findPivot(ArrayList<T> list, int left, int right,
 			String choice, Comparator<? super T> cmp, Random rand) {
 		T pivot;
 		switch (choice) {
-		// center element
+		// chooses the center element of the array
 		case "Center": {
 			pivot = list.get((left + right) / 2);
 			break;
 		}
-		// Random element in the list
+		// chooses a random element in the list
 		case "Random": {
 			pivot = list.get(left + rand.nextInt(right - left));
 			break;
 		}
-		// median of first, middle, and last elements
+		// chooses the median of three randomly selected elements
 		case "Median": {
-			T mid = list.get(left + rand.nextInt(right - left));
-			T top = list.get(left + rand.nextInt(right - left));
-			T bot = list.get(left + rand.nextInt(right - left));
-			if (cmp.compare(mid, top)>=0) {
-				  if (cmp.compare(top, bot)>=0) {
-				    pivot = top;
-				  } else if (cmp.compare(mid, bot)>=0) {
-				    pivot = bot;
-				  } else {
-				    return pivot = mid;
-				  }
+			T a = list.get(left + rand.nextInt(right - left));
+			T b = list.get(left + rand.nextInt(right - left));
+			T c = list.get(left + rand.nextInt(right - left));
+			if (cmp.compare(a, b) >= 0) {
+				if (cmp.compare(b, c) >= 0) {
+					pivot = b;
+				} else if (cmp.compare(a, c) >= 0) {
+					pivot = c;
 				} else {
-				  if (cmp.compare(mid, bot)>=0) {
-				    pivot = mid;
-				  } else if (cmp.compare(top, bot)>=0) {
-				    pivot = bot;
-				  } else {
-				    pivot = top;
-				  }
+					return pivot = a;
 				}
+			} else {
+				if (cmp.compare(a, c) >= 0) {
+					pivot = a;
+				} else if (cmp.compare(b, c) >= 0) {
+					pivot = c;
+				} else {
+					pivot = b;
+				}
+			}
 			break;
 		}
 		default: {
